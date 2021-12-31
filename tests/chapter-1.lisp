@@ -16,3 +16,8 @@
 
 ;; Exercise 1.4
 (check-equal (count-anywhere 'a '(a ((a) b) a)) 3)
+
+;; Exercise 1.5
+(check-equal (dot-product '(10 20) '(3 4)) (+ (* 10 3) (* 20 4)))
+(check-equal (dot-product '(10) '(3 4)) 30)
+(check-equal (dot-product '(10 20) '(3)) 30)

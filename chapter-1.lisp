@@ -19,9 +19,11 @@
     (first-name (reverse name))))
 
 (defun power (base exp)
+  "Return BASE raised to the power of EXP."
   (apply #'* (make-list exp :initial-element base)))
 
 (defun count-atoms (list)
+  "Return the count of atoms in LIST. Does not count NIL as an atom."
   (cond
     ((null list)
      0)
@@ -33,6 +35,7 @@
         (count-atoms (rest list))))))
 
 (defun count-anywhere (x list)
+  "Return the count of X in LIST and in any list contained in LIST."
   (cond
     ((null list) 0)
     (t
@@ -41,3 +44,10 @@
           ((eq x (first list)) 1)
           (t 0))
         (count-anywhere x (rest list))))))
+
+(defun dot-product (x y)
+  "Return the dot product of X and Y."
+  (if (or (null x) (null y))
+      0
+      (+ (* (first x) (first y))
+         (dot-product (rest x) (rest y)))))
