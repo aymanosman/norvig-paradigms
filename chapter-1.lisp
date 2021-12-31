@@ -31,3 +31,13 @@
           ((listp (first list)) (count-atoms (first list)))
           (t 1))
         (count-atoms (rest list))))))
+
+(defun count-anywhere (x list)
+  (cond
+    ((null list) 0)
+    (t
+     (+ (cond
+          ((listp (first list)) (count-anywhere x (first list)))
+          ((eq x (first list)) 1)
+          (t 0))
+        (count-anywhere x (rest list))))))

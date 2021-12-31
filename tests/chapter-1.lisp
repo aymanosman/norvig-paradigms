@@ -13,3 +13,6 @@
 (check-equal (count-atoms '(a (b) c)) 3)
 (check-equal (count-atoms '(a nil c)) 2)
 (check-equal (count-atoms '(a (b c) d)) 4)
+
+;; Exercise 1.4
+(check-equal (count-anywhere 'a '(a ((a) b) a)) 3)
