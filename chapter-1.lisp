@@ -17,3 +17,6 @@
   "Select the last name from a name represented as a list."
   (let ((*titles* *suffixes*))
     (first-name (reverse name))))
+
+(defun power (base exp)
+  (apply #'* (make-list exp :initial-element base)))
