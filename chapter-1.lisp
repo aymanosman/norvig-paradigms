@@ -20,3 +20,14 @@
 
 (defun power (base exp)
   (apply #'* (make-list exp :initial-element base)))
+
+(defun count-atoms (list)
+  (cond
+    ((null list)
+     0)
+    (t
+     (+ (cond
+          ((null (first list)) 0)
+          ((listp (first list)) (count-atoms (first list)))
+          (t 1))
+        (count-atoms (rest list))))))

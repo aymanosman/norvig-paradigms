@@ -8,3 +8,8 @@
 ;; Exercise 1.2
 (check-equal (power 3 2) 9)
 (check-equal (power 2 3) 8)
+
+;; Exercise 1.3
+(check-equal (count-atoms '(a (b) c)) 3)
+(check-equal (count-atoms '(a nil c)) 2)
+(check-equal (count-atoms '(a (b c) d)) 4)
