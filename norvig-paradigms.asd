@@ -3,19 +3,18 @@
   :author "Ayman Osman"
   :license ""
   :depends-on ()
-  :components ((:module "src"
-                :components
-                ((:file "main"))))
+  :components ((:file "package")
+               (:file "chapter-1"))
   :description ""
   :in-order-to ((test-op (test-op "norvig-paradigms/tests"))))
 
 (defsystem "norvig-paradigms/tests"
   :author "Ayman Osman"
   :license ""
-  :depends-on ("norvig-paradigms"
-               "rove")
+  :depends-on ("norvig-paradigms")
   :components ((:module "tests"
                 :components
-                ((:file "main"))))
-  :description "Test system for norvig-paradigms"
-  :perform (test-op (op c) (symbol-call :rove :run c)))
+                ((:file "package")
+                 (:file "test-framework")
+                 (:file "chapter-1"))))
+  :description "Test system for norvig-paradigms")
