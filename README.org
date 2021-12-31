@@ -1,0 +1,13 @@
+* Norvig-Paradigms 
+
+** Usage
+
+** Installation
+
+** Author
+
++ Ayman Osman
+
+** Copyright
+
+Copyright (c) 2021 Ayman Osman
