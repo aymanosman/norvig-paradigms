@@ -18,36 +18,45 @@
   (let ((*titles* *suffixes*))
     (first-name (reverse name))))
 
-(defun power (base exp)
-  "Return BASE raised to the power of EXP."
-  (apply #'* (make-list exp :initial-element base)))
-
-(defun count-atoms (list)
-  "Return the count of atoms in LIST. Does not count NIL as an atom."
+(defun power (base n)
+  "Return Nth power of BASE."
   (cond
-    ((null list)
+    ((= n 0)
+     1)
+    ((evenp n)
+     (expt (power base (/ n 2)) 2))
+    (t
+     (* base (power base (- n 1))))))
+
+(defun count-atoms (exp)
+  "Return the count of non-nil atoms in LIST."
+  (cond
+    ((null exp)
+     0)
+    ((atom exp)
+     1)
+    (t
+     (+ (count-atoms (first exp))
+        (count-atoms (rest exp))))))
+
+(defun count-anywhere (item tree)
+  "Return the count of ITEM appearing anywhere in TREE."
+  (cond
+    ((null tree)
      0)
     (t
      (+ (cond
-          ((null (first list)) 0)
-          ((listp (first list)) (count-atoms (first list)))
-          (t 1))
-        (count-atoms (rest list))))))
+          ((listp (first tree))
+           (count-anywhere item (first tree)))
+          ((eq item (first tree))
+           1)
+          (t
+           0))
+        (count-anywhere item (rest tree))))))
 
-(defun count-anywhere (x list)
-  "Return the count of X in LIST and in any list contained in LIST."
-  (cond
-    ((null list) 0)
-    (t
-     (+ (cond
-          ((listp (first list)) (count-anywhere x (first list)))
-          ((eq x (first list)) 1)
-          (t 0))
-        (count-anywhere x (rest list))))))
-
-(defun dot-product (x y)
-  "Return the dot product of X and Y."
-  (if (or (null x) (null y))
+(defun dot-product (a b)
+  "Return the dot product of A and B."
+  (if (or (null a) (null b))
       0
-      (+ (* (first x) (first y))
-         (dot-product (rest x) (rest y)))))
+      (+ (* (first a) (first b))
+         (dot-product (rest a) (rest b)))))
