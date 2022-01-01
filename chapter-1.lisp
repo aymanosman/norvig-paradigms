@@ -30,29 +30,16 @@
 
 (defun count-atoms (exp)
   "Return the count of non-nil atoms in LIST."
-  (cond
-    ((null exp)
-     0)
-    ((atom exp)
-     1)
-    (t
-     (+ (count-atoms (first exp))
-        (count-atoms (rest exp))))))
+  (cond ((and (atom exp) (not (null exp))) 1)
+        (t (apply #'+ (mapcar #'count-atoms exp)))))
 
 (defun count-anywhere (item tree)
   "Return the count of ITEM appearing anywhere in TREE."
-  (cond
-    ((null tree)
-     0)
-    (t
-     (+ (cond
-          ((listp (first tree))
-           (count-anywhere item (first tree)))
-          ((eq item (first tree))
-           1)
-          (t
-           0))
-        (count-anywhere item (rest tree))))))
+  (cond ((null tree) 0)
+        (t (+ (cond ((listp (first tree)) (count-anywhere item (first tree)))
+                    ((eq item (first tree)) 1)
+                    (t 0))
+              (count-anywhere item (rest tree))))))
 
 (defun dot-product (a b)
   "Return the dot product of A and B."
